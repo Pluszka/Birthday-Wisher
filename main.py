@@ -1,19 +1,10 @@
-import smtplib
-from random import choice
-import datetime as dt
+##################### Extra Hard Starting Project ######################
 
-email_day = 1
-current_day_of_week = dt.datetime.now().weekday()
+# 1. Update the birthdays.csv
 
-with open('quotes.txt') as file:
-    quotes = file.readlines()
+# 2. Check if today matches a birthday in the birthdays.csv
 
-my_email = 'TTe2sTT@gmail.com'
-password = 'day32test.'
-if email_day == current_day_of_week:
-    with smtplib.SMTP("smtp.gmail.com") as connection:
-        connection.starttls()
-        connection.login(user=my_email, password=password)
-        connection.sendmail(from_addr=my_email,
-                            to_addrs='te1st@yahoo.com',
-                            msg=f'Subject:Quote\n\n{choice(quotes)}')
+# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
+
+# 4. Send the letter generated in step 3 to that person's email address.
+
