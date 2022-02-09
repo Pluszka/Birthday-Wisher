@@ -27,4 +27,4 @@ for person in birthdays_data:
             connection.starttls()
             connection.login(user=my_email, password=my_password)
             connection.sendmail(from_addr=my_email, to_addrs=row['email'],
-                                msg=f'Happy Birthday\n\n{choice(wishes).replace("[NAME]", row["name"])}')
+                                msg=f'Subject:Happy Birthday\n\n{choice(wishes).replace("[NAME]", row["name"])}')
