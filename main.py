@@ -2,6 +2,7 @@ import pandas as pd
 import datetime as dt
 import smtplib
 from data import password, login
+from random import choice
 
 data = pd.read_csv('birthdays.csv')
 data = data.to_dict(orient='records')
@@ -19,9 +20,8 @@ for letter in letters:
         wishes.append(file)
 print(wishes)
 for row in data:
-#     connection = smtplib.SMTP('smtp.gmail.com')
-#     connection.starttls()
-#     connection.login(user=my_email, password=my_password)
-#     connection.sendmail(from_addr=my_email, to_addrs=row['email'], smg='Happy Birthday\n\n')
-
-
+    connection = smtplib.SMTP('smtp.gmail.com')
+    connection.starttls()
+    connection.login(user=my_email, password=my_password)
+    connection.sendmail(from_addr=my_email, to_addrs=row['email'],
+                        msg=f'Happy Birthday\n\n{choice(wishes.replace("[NAME]", row["name"]))}')
