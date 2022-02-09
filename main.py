@@ -4,9 +4,9 @@ import smtplib
 from data import password, login
 from random import choice
 
-data = pd.read_csv('birthdays.csv')
-data = data.to_dict(orient='records')
-print(data)
+birthdays_data = pd.read_csv('birthdays.csv')
+birthdays_data = birthdays_data.to_dict(orient='records')
+print(birthdays_data)
 current_day = dt.datetime.today().day
 current_month = dt.datetime.today().month
 
@@ -19,9 +19,12 @@ for letter in letters:
         file = file.read()
         wishes.append(file)
 print(wishes)
-for row in data:
-    connection = smtplib.SMTP('smtp.gmail.com')
-    connection.starttls()
-    connection.login(user=my_email, password=my_password)
-    connection.sendmail(from_addr=my_email, to_addrs=row['email'],
-                        msg=f'Happy Birthday\n\n{choice(wishes.replace("[NAME]", row["name"]))}')
+
+for person in birthdays_data:
+    if current_month == person['month'] and current_day == person['day']:
+        for row in birthdays_data:
+            connection = smtplib.SMTP('smtp.gmail.com')
+            connection.starttls()
+            connection.login(user=my_email, password=my_password)
+            connection.sendmail(from_addr=my_email, to_addrs=row['email'],
+                                msg=f'Happy Birthday\n\n{choice(wishes).replace("[NAME]", row["name"])}')
